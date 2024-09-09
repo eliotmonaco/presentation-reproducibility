@@ -447,8 +447,8 @@ Eliot Monaco
 <li class="fragment"><strong>Consistent output</strong>: produces the same output regardless of time, place, or person</li>
 </ul>
 <aside class="notes">
-<p>Things to strive for. Not every project can be perfectly reproducible in every way. You still have to do your job, meet deadlines. Goal is to give you things you can implement more or less right away to level up the reproducibility of projects.</p>
 <p>This is oriented toward data analysis projects in R.</p>
+<p>Things to strive for, can’t necessarily do everything perfectly.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -487,9 +487,8 @@ Eliot Monaco
 </ul>
 <aside class="notes">
 <p>Please use projects!</p>
-<p>I used to spend some time agonizing over what deserved to be a project when I was starting something new. Now I realize that in pretty much every case where I’m wondering this, I should start a new project. More on this later, but it’s better to have many well-organized, lean projects than fewer bloated projects, in my opinion. And if you start with a project structure, then begin writing your script, you’re in a better position than if you start with a script and then later realize you need this to be a project.</p>
-<p>Instead of justifying when to start a project, justify when NOT to. Make projects your default.</p>
-<p>Now that we have the project container, we’ll talk about what goes on inside.</p>
+<p>Instead of justifying when to start a project, justify when NOT to. Make starting projects your default.</p>
+<p>Better to have many well-organized, lean projects than fewer bloated projects, in my opinion.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -556,8 +555,7 @@ my-project/
 </div></div>
 <aside class="notes">
 <p>What order to run scripts? What is the final output? Is the analysis even complete?</p>
-<p>These both might produce the same output, but which would you rather see when you open the project and have to make sense of it (on a deadline)? This could be your own project from a year ago, or it could be a colleague’s project who just had to go on emergency leave.</p>
-<p>Reproducibility isn’t just about the technical parts of an analysis. It’s also about making sure that another person, who may not have your exact skill set, can walk through the analysis and understand it well enough to run it.</p>
+<p>Both might produce the same output, but which would you rather see when you open the project and have to make sense of it (on a deadline)?</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -881,14 +879,6 @@ loaded via a namespace (and not attached):
 </section>
 <section id="more-renv" class="slide level2">
 <h2>More renv</h2>
-<!-- - `renv::activate()` -->
-<!--     + Call to enable renv (if not already activated) -->
-<!--     + e.g., if only a lockfile exists because `renv::init()` was never called, do this before `renv::restore()` -->
-<!-- - `renv::status()` -->
-<!--     + Call to report problems: packages used but not installed, installed but not used, version out of sync -->
-<!-- - `renv::deactivate(clean = TRUE)` -->
-<!--     + Call to deactivate renv -->
-<!--     + arg `clean = TRUE` will remove the library and lockfile -->
 <p><code>renv::activate()</code></p>
 <div>
 <ul>
@@ -1006,12 +996,6 @@ loaded via a namespace (and not attached):
 <li>R for Epidemiology: <a href="https://www.r4epi.com/r-projects">R Projects</a> &amp; <a href="https://www.r4epi.com/coding-best-practices">Coding Best Practices</a></li>
 </ul>
 </div>
-<!-- :::{.columns} -->
-<!-- ::::{.column} -->
-<!-- :::: -->
-<!-- ::::{.column} -->
-<!-- :::: -->
-<!-- ::: -->
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">

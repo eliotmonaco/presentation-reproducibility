@@ -15,8 +15,6 @@ format:
     scrollable: true
     chalkboard:
       buttons: false
-    # df-print: "paged"
-    # embed-resources: true
 ---
 
 ```{r setup, include=FALSE}
@@ -51,9 +49,9 @@ Reproducibility and documentation are often the last things we're thinking of wh
 - **Consistent output**: produces the same output regardless of time, place, or person
 
 :::{.notes}
-Things to strive for. Not every project can be perfectly reproducible in every way. You still have to do your job, meet deadlines. Goal is to give you things you can implement more or less right away to level up the reproducibility of projects.
-
 This is oriented toward data analysis projects in R.
+
+Things to strive for, can't necessarily do everything perfectly.
 :::
 
 ## What do you need for reproducibility?
@@ -77,11 +75,9 @@ This is oriented toward data analysis projects in R.
 :::{.notes}
 Please use projects!
 
-I used to spend some time agonizing over what deserved to be a project when I was starting something new. Now I realize that in pretty much every case where I'm wondering this, I should start a new project. More on this later, but it's better to have many well-organized, lean projects than fewer bloated projects, in my opinion. And if you start with a project structure, then begin writing your script, you're in a better position than if you start with a script and then later realize you need this to be a project.
+Instead of justifying when to start a project, justify when NOT to. Make starting projects your default.
 
-Instead of justifying when to start a project, justify when NOT to. Make projects your default.
-
-Now that we have the project container, we'll talk about what goes on inside.
+Better to have many well-organized, lean projects than fewer bloated projects, in my opinion.
 :::
 
 ## Parts of an analysis: Files
@@ -151,9 +147,7 @@ my-project/
 :::{.notes}
 What order to run scripts? What is the final output? Is the analysis even complete?
 
-These both might produce the same output, but which would you rather see when you open the project and have to make sense of it (on a deadline)? This could be your own project from a year ago, or it could be a colleague's project who just had to go on emergency leave.
-
-Reproducibility isn't just about the technical parts of an analysis. It's also about making sure that another person, who may not have your exact skill set, can walk through the analysis and understand it well enough to run it.
+Both might produce the same output, but which would you rather see when you open the project and have to make sense of it (on a deadline)?
 :::
 
 ## Good project structure
@@ -421,15 +415,6 @@ Stolen from <https://www.geeksforgeeks.org/reproducibility-in-r-programming/>
 
 ## More renv
 
-<!-- - `renv::activate()` -->
-<!--     + Call to enable renv (if not already activated) -->
-<!--     + e.g., if only a lockfile exists because `renv::init()` was never called, do this before `renv::restore()` -->
-<!-- - `renv::status()` -->
-<!--     + Call to report problems: packages used but not installed, installed but not used, version out of sync -->
-<!-- - `renv::deactivate(clean = TRUE)` -->
-<!--     + Call to deactivate renv -->
-<!--     + arg `clean = TRUE` will remove the library and lockfile -->
-
 `renv::activate()`
 
 :::{.nonincremental}
@@ -519,14 +504,3 @@ Includes using:
 - [Geeks for Geeks: Reproducibility In R Programming](https://www.geeksforgeeks.org/reproducibility-in-r-programming/)
 - R for Epidemiology: [R Projects](https://www.r4epi.com/r-projects) & [Coding Best Practices](https://www.r4epi.com/coding-best-practices)
 :::
-
-<!-- :::{.columns} -->
-<!-- ::::{.column} -->
-
-<!-- :::: -->
-<!-- ::::{.column} -->
-
-<!-- :::: -->
-<!-- ::: -->
-
-
