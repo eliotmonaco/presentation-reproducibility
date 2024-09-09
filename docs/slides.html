@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="slides_files/libs/clipboard/clipboard.min.js"></script>
-<script src="slides_files/libs/quarto-html/tabby.min.js"></script>
-<script src="slides_files/libs/quarto-html/popper.min.js"></script>
-<script src="slides_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="slides_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="slides_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="slides_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="slides_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/tabby.min.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.55">
 
   <meta name="author" content="Eliot Monaco">
   <meta name="dcterms.date" content="2024-09-09">
-  <title>Reproducibility, organization, and documentation in R</title>
+  <title>presentation-reproducibility – Reproducibility, organization, and documentation in R</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="slides_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="slides_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -96,14 +96,14 @@
     code span.vs { color: #9ecbff; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="slides_files/libs/revealjs/dist/theme/quarto.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="styles.css">
-  <link href="slides_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="slides_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="slides_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="slides_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="slides_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="slides_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -620,29 +620,29 @@ the RStudio project file</code></pre>
 <section id="let-a-function-do-it-for-you" class="slide level2">
 <h2>Let a function do it for you</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>create_project_dirs <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">type =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">root =</span> <span class="fu">getwd</span>()) {</span>
-<span id="cb5-2"><a href=""></a>  <span class="cf">if</span> (type <span class="sc">==</span> <span class="dv">1</span>) {</span>
-<span id="cb5-3"><a href=""></a>    dirs <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb5-4"><a href=""></a>      <span class="st">"data"</span>, <span class="st">"data/1-source"</span>, <span class="st">"data/2-aux"</span>, <span class="st">"data/3-final"</span>,</span>
-<span id="cb5-5"><a href=""></a>      <span class="st">"output"</span>,</span>
-<span id="cb5-6"><a href=""></a>      <span class="st">"scripts"</span></span>
-<span id="cb5-7"><a href=""></a>    )</span>
-<span id="cb5-8"><a href=""></a>  } <span class="cf">else</span> <span class="cf">if</span> (type <span class="sc">==</span> <span class="dv">2</span>) {</span>
-<span id="cb5-9"><a href=""></a>    dirs <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb5-10"><a href=""></a>      <span class="st">"data"</span>, <span class="st">"data/1-source"</span>, <span class="st">"data/2-final"</span>,</span>
-<span id="cb5-11"><a href=""></a>      <span class="st">"output"</span>,</span>
-<span id="cb5-12"><a href=""></a>      <span class="st">"scripts"</span></span>
-<span id="cb5-13"><a href=""></a>    )</span>
-<span id="cb5-14"><a href=""></a>  } <span class="cf">else</span> {</span>
-<span id="cb5-15"><a href=""></a>    <span class="fu">stop</span>(<span class="st">"`type` must be 1 or 2"</span>)</span>
-<span id="cb5-16"><a href=""></a>  }</span>
-<span id="cb5-17"><a href=""></a></span>
-<span id="cb5-18"><a href=""></a>  dirs <span class="ot">&lt;-</span> <span class="fu">paste</span>(root, dirs, <span class="at">sep =</span> <span class="st">"/"</span>)</span>
-<span id="cb5-19"><a href=""></a></span>
-<span id="cb5-20"><a href=""></a>  <span class="fu">lapply</span>(dirs, dir.create)</span>
-<span id="cb5-21"><a href=""></a></span>
-<span id="cb5-22"><a href=""></a>  <span class="fu">invisible</span>(root)</span>
-<span id="cb5-23"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>create_project_dirs <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">type =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">root =</span> <span class="fu">getwd</span>()) {</span>
+<span id="cb5-2"><a></a>  <span class="cf">if</span> (type <span class="sc">==</span> <span class="dv">1</span>) {</span>
+<span id="cb5-3"><a></a>    dirs <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb5-4"><a></a>      <span class="st">"data"</span>, <span class="st">"data/1-source"</span>, <span class="st">"data/2-aux"</span>, <span class="st">"data/3-final"</span>,</span>
+<span id="cb5-5"><a></a>      <span class="st">"output"</span>,</span>
+<span id="cb5-6"><a></a>      <span class="st">"scripts"</span></span>
+<span id="cb5-7"><a></a>    )</span>
+<span id="cb5-8"><a></a>  } <span class="cf">else</span> <span class="cf">if</span> (type <span class="sc">==</span> <span class="dv">2</span>) {</span>
+<span id="cb5-9"><a></a>    dirs <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb5-10"><a></a>      <span class="st">"data"</span>, <span class="st">"data/1-source"</span>, <span class="st">"data/2-final"</span>,</span>
+<span id="cb5-11"><a></a>      <span class="st">"output"</span>,</span>
+<span id="cb5-12"><a></a>      <span class="st">"scripts"</span></span>
+<span id="cb5-13"><a></a>    )</span>
+<span id="cb5-14"><a></a>  } <span class="cf">else</span> {</span>
+<span id="cb5-15"><a></a>    <span class="fu">stop</span>(<span class="st">"`type` must be 1 or 2"</span>)</span>
+<span id="cb5-16"><a></a>  }</span>
+<span id="cb5-17"><a></a></span>
+<span id="cb5-18"><a></a>  dirs <span class="ot">&lt;-</span> <span class="fu">paste</span>(root, dirs, <span class="at">sep =</span> <span class="st">"/"</span>)</span>
+<span id="cb5-19"><a></a></span>
+<span id="cb5-20"><a></a>  <span class="fu">lapply</span>(dirs, dir.create)</span>
+<span id="cb5-21"><a></a></span>
+<span id="cb5-22"><a></a>  <span class="fu">invisible</span>(root)</span>
+<span id="cb5-23"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section>
 <section>
@@ -665,7 +665,7 @@ the RStudio project file</code></pre>
 </ul>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a>my_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/1-source/data_file.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>my_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/1-source/data_file.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>“C:/Users/Username/OneDrive/Documents/r_projects_folder/my_project” is implied in the relative path above</p>
 </section>
@@ -673,8 +673,8 @@ the RStudio project file</code></pre>
 <h2>Inward-pointing paths</h2>
 <p>When you reference a file outside the project, it’s no longer self-contained</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="co"># This is data I really need, but it's not in my project</span></span>
-<span id="cb7-2"><a href=""></a>other_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../../another_folder/important_data_outside_my_project.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="co"># This is data I really need, but it's not in my project</span></span>
+<span id="cb7-2"><a></a>other_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../../another_folder/important_data_outside_my_project.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="why-adhere-to-this" class="slide level2">
@@ -697,7 +697,7 @@ the RStudio project file</code></pre>
 </ul>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a>my_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../data/1-source/data_file.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>my_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../data/1-source/data_file.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <pre><code>my-project/                         the wd for the project
 |
@@ -794,7 +794,7 @@ the RStudio project file</code></pre>
 <section id="sessioninfo-1" class="slide level2">
 <h2><code>sessionInfo()</code></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.4.0 (2024-04-24 ucrt)
 Platform: x86_64-w64-mingw32/x64
@@ -824,9 +824,9 @@ loaded via a namespace (and not attached):
 <h2><code>sessionInfo()</code></h2>
 <p>You can print the output directly to a text file</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a><span class="fu">sink</span>(<span class="st">"session_info.txt"</span>)</span>
-<span id="cb12-2"><a href=""></a><span class="fu">sessionInfo</span>()</span>
-<span id="cb12-3"><a href=""></a><span class="fu">sink</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">sink</span>(<span class="st">"session_info.txt"</span>)</span>
+<span id="cb12-2"><a></a><span class="fu">sessionInfo</span>()</span>
+<span id="cb12-3"><a></a><span class="fu">sink</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 <aside><div>
@@ -1012,6 +1012,7 @@ loaded via a namespace (and not attached):
 <!-- ::::{.column} -->
 <!-- :::: -->
 <!-- ::: -->
+
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
@@ -1022,20 +1023,20 @@ loaded via a namespace (and not attached):
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="slides_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="site_libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="slides_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="slides_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="slides_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="slides_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="slides_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="slides_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="slides_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="slides_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="slides_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="slides_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>

@@ -1,0 +1,247 @@
+[
+  {
+    "objectID": "slides.html#time-and-change",
+    "href": "slides.html#time-and-change",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "Time and change",
+    "text": "Time and change\n\nWhen we’re immersed in an analysis, the methodology is never clearer\nThen things happen\nHow do we ensure that we, or someone else, can run the analysis and get the same output?\n\n\nWe go away, things change, we forget. Did we leave the project in a state where it can be easily followed, and the output can be reproduced? Did changes to packages, R, or something else cause any part to break?\nReproducibility and documentation are often the last things we’re thinking of when we do an analysis."
+  },
+  {
+    "objectID": "slides.html#what-does-it-mean-to-be-reproducible",
+    "href": "slides.html#what-does-it-mean-to-be-reproducible",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "What does it mean to be reproducible?",
+    "text": "What does it mean to be reproducible?\n\nSelf-contained: all in one directory\nPortable: can be moved or copied without breaking it or changing the output\nEverything is in code: the analysis in run from scripts with nothing left out\nEverything is automated: minimal human intervention or decision-making\nClearly ordered: no ambiguity which parts/which order to run everything\nNot dependent on you: can be executed successfully by someone unfamiliar with the project\nConsistent output: produces the same output regardless of time, place, or person\n\n\nThings to strive for. Not every project can be perfectly reproducible in every way. You still have to do your job, meet deadlines. Goal is to give you things you can implement more or less right away to level up the reproducibility of projects.\nThis is oriented toward data analysis projects in R."
+  },
+  {
+    "objectID": "slides.html#what-do-you-need-for-reproducibility",
+    "href": "slides.html#what-do-you-need-for-reproducibility",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "What do you need for reproducibility?",
+    "text": "What do you need for reproducibility?\n\nSimple, predictable project organization\nClear documentation\nGood habits, especially when beginning and when stepping away from (opening and closing?) a project\nCollectively, “housekeeping”"
+  },
+  {
+    "objectID": "slides.html#use-rstudio-projects",
+    "href": "slides.html#use-rstudio-projects",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "Use RStudio projects",
+    "text": "Use RStudio projects\n\nCreated to make R projects easy to organize and reproducible\nGroup all project files in one directory\nSets the working directory to the project directory\nEasily integrate versioning (git/GitHub)\nNecessary for using renv (package documentation)\nFile &gt; New Project\n\n\nPlease use projects!\nI used to spend some time agonizing over what deserved to be a project when I was starting something new. Now I realize that in pretty much every case where I’m wondering this, I should start a new project. More on this later, but it’s better to have many well-organized, lean projects than fewer bloated projects, in my opinion. And if you start with a project structure, then begin writing your script, you’re in a better position than if you start with a script and then later realize you need this to be a project.\nInstead of justifying when to start a project, justify when NOT to. Make projects your default.\nNow that we have the project container, we’ll talk about what goes on inside."
+  },
+  {
+    "objectID": "slides.html#parts-of-an-analysis-files",
+    "href": "slides.html#parts-of-an-analysis-files",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "Parts of an analysis: Files",
+    "text": "Parts of an analysis: Files\n\nsource data, final data, intermediate data,  other helpful data, analysis/processing scripts,  data viz script, custom function scripts,  script to load additional data, CSV output,  Excel output, HTML/XML/JSON output, plots,  tables, maps, reports, Rhistory, RData"
+  },
+  {
+    "objectID": "slides.html#file-organization",
+    "href": "slides.html#file-organization",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "File organization",
+    "text": "File organization\n\n\n\n\n\n\nmy-project/\n|-- .Rhistory\n|-- analysis_script.R\n|-- compare_outputs.R\n|-- data.rds\n|-- data_processing_script.R\n|-- data1.rds\n|-- data2.rds\n|-- df.csv\n|-- df1.rds\n|-- df2.rds\n|-- exploration.R\n|-- notes.txt\n|-- old_script.R\n|-- original_script.R\n|-- process_source_data.R\n|-- report.Rmd\n|-- workspace.RData\n|-- workspace1.RData\n\n\n\nmy-project/\n|-- data/\n|   |-- 1-source/\n|   |   |-- data1.rds\n|   |   |-- data2.rds\n|   |-- 2-final/\n|       |-- data_final.rds\n|-- output/\n|   |-- plot1.png\n|   |-- table1.csv\n|   |-- table2.csv\n|-- scripts/\n    |-- 01_data_validation.Rmd\n    |-- 02_data_processing.Rmd\n    |-- 03_data_viz.Rmd\n\n\nWhat order to run scripts? What is the final output? Is the analysis even complete?\nThese both might produce the same output, but which would you rather see when you open the project and have to make sense of it (on a deadline)? This could be your own project from a year ago, or it could be a colleague’s project who just had to go on emergency leave.\nReproducibility isn’t just about the technical parts of an analysis. It’s also about making sure that another person, who may not have your exact skill set, can walk through the analysis and understand it well enough to run it."
+  },
+  {
+    "objectID": "slides.html#good-project-structure",
+    "href": "slides.html#good-project-structure",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "Good project structure",
+    "text": "Good project structure\n\nConsistent and predictable across similar projects\nEasily accommodates variation\nAs simple as possible"
+  },
+  {
+    "objectID": "slides.html#project-structure-example",
+    "href": "slides.html#project-structure-example",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "Project structure example",
+    "text": "Project structure example\n\n\n\n\n\nmy-project/\n|\n|-- data/\n|   |-- 1-source/\n|   |-- 2-aux/\n|   |-- 3-final/\n|\n|-- output/\n|\n|\n|-- scripts/\n|\n|\n|-- my-project.Rproj\n\n\n\n\n\nsource data only (from outside the project)\nintermediate/auxiliary data (everything else)\nfinal data only (the end result(s) of the project)\n\nnon-native data products (for use outside of R)\n - CSV, XLSX, HTML, XML, etc.\n\ncode scripts for analysis, custom functions,\nadditional data, reports, etc.\n\nthe RStudio project file"
+  },
+  {
+    "objectID": "slides.html#let-a-function-do-it-for-you",
+    "href": "slides.html#let-a-function-do-it-for-you",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "Let a function do it for you",
+    "text": "Let a function do it for you\n\ncreate_project_dirs &lt;- function(type = c(1, 2), root = getwd()) {\n  if (type == 1) {\n    dirs &lt;- c(\n      \"data\", \"data/1-source\", \"data/2-aux\", \"data/3-final\",\n      \"output\",\n      \"scripts\"\n    )\n  } else if (type == 2) {\n    dirs &lt;- c(\n      \"data\", \"data/1-source\", \"data/2-final\",\n      \"output\",\n      \"scripts\"\n    )\n  } else {\n    stop(\"`type` must be 1 or 2\")\n  }\n\n  dirs &lt;- paste(root, dirs, sep = \"/\")\n\n  lapply(dirs, dir.create)\n\n  invisible(root)\n}"
+  },
+  {
+    "objectID": "slides.html#paths",
+    "href": "slides.html#paths",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "Paths",
+    "text": "Paths\nUse paths that are relative and inward-pointing"
+  },
+  {
+    "objectID": "slides.html#relative-paths",
+    "href": "slides.html#relative-paths",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "Relative paths",
+    "text": "Relative paths\n\n\nRStudio projects set the working directory to the project’s main directory by default\nLeave this alone, and use relative paths\nA relative path uses the working directory as the baseline\nAn absolute path conveys the whole path explicitly\n\n\n\nmy_data &lt;- read.csv(\"data/1-source/data_file.csv\")\n\n“C:/Users/Username/OneDrive/Documents/r_projects_folder/my_project” is implied in the relative path above"
+  },
+  {
+    "objectID": "slides.html#inward-pointing-paths",
+    "href": "slides.html#inward-pointing-paths",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "Inward-pointing paths",
+    "text": "Inward-pointing paths\nWhen you reference a file outside the project, it’s no longer self-contained\n\n# This is data I really need, but it's not in my project\nother_data &lt;- read.csv(\"../../another_folder/important_data_outside_my_project.csv\")"
+  },
+  {
+    "objectID": "slides.html#why-adhere-to-this",
+    "href": "slides.html#why-adhere-to-this",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "Why adhere to this?",
+    "text": "Why adhere to this?\n\nChanging the wd can cause confusion (errors?)\nIf a change of wd is not written into the script, it will be difficult to track\nA change of wd takes the same time as typing a relative path, so…\nIf your project is collaborative, e.g., via GitHub, relative inward-pointing paths are the only way to ensure paths work for everyone\nIf a project is moved, or if files or folders change outside a project, outward-pointing paths will break"
+  },
+  {
+    "objectID": "slides.html#markdown-files",
+    "href": "slides.html#markdown-files",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "Markdown files",
+    "text": "Markdown files\n\n\nFor markdown files, including Quarto, the wd is the directory the markdown file is saved in.\nIf analysis.Rmd is saved in my_project/scripts/, that is the wd for that file.\nTo import data, I would need to go up a level, as in\n\n\n\nmy_data &lt;- read.csv(\"../data/1-source/data_file.csv\")\n\nmy-project/                         the wd for the project\n|\n|-- data/\n|   |-- 1-source/\n|       |-- data_file.csv\n|\n|-- scripts/                        the wd for the RMD\n        |-- analysis.Rmd"
+  },
+  {
+    "objectID": "slides.html#scripts",
+    "href": "slides.html#scripts",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "Scripts",
+    "text": "Scripts\n\nNumber scripts in sequential order of execution\n\ne.g., 01_clean_data.R, 02_analyze_data.R, 03_create_plots.R\n\nWrite scripts so that they can be executed from top to bottom (no skipping around)\nIf the analysis is interactive, write every step into the code so that when it’s finished you can clear your environment, run the whole script at once (Ctrl + Alt + R), and get the same output\nInclude a Purpose section for each script"
+  },
+  {
+    "objectID": "slides.html#scripts-1",
+    "href": "slides.html#scripts-1",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "Scripts",
+    "text": "Scripts\n\nEvery time an object is brought into the global environment, it’s written in code\n\nreadRDS(), read.csv(), etc. for importing data files\nlibrary(), p_load() for attaching packages\nsource() for scripts, e.g., those containing custom functions"
+  },
+  {
+    "objectID": "slides.html#a-recommendation",
+    "href": "slides.html#a-recommendation",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "A recommendation",
+    "text": "A recommendation\nDon’t save Rhistory or RData (workspace) files—everything should be possible to recreate from your scripts\n\n\n\n\n\n\n\nYou can disable automatically saving these in Tools &gt; Global Options &gt; General"
+  },
+  {
+    "objectID": "slides.html#the-code",
+    "href": "slides.html#the-code",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "The code",
+    "text": "The code\n\nHuman-readable code\n\nyour future self and anyone who has to read your code with thank you\n\nFollow style conventions (e.g., tidyverse)\nUse styler from Addins or create an easy keyboard shortcut\n\nTools &gt; Modify Keyboard Shortcuts\ntype “style” in search\nclick in the Shortcut field and type the shortcut you want\n\nRisk over-commenting\nRMDs, QMDs, & notebooks combine code, code output, text/narrative, and reports all in one"
+  },
+  {
+    "objectID": "slides.html#parts-of-an-analysis-the-environment",
+    "href": "slides.html#parts-of-an-analysis-the-environment",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "Parts of an analysis: The environment",
+    "text": "Parts of an analysis: The environment\n\nPackages\n\nBase R - attached automatically\nExplicitly attached packages\nCustom packages\n\nR (version)\nOperating system"
+  },
+  {
+    "objectID": "slides.html#sessioninfo",
+    "href": "slides.html#sessioninfo",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "sessionInfo()",
+    "text": "sessionInfo()\nsessionInfo() captures a snapshot of your session\n\n\nR version\npackage versions\noperating system\nand more"
+  },
+  {
+    "objectID": "slides.html#sessioninfo-1",
+    "href": "slides.html#sessioninfo-1",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "sessionInfo()",
+    "text": "sessionInfo()\n\nsessionInfo()\n\nR version 4.4.0 (2024-04-24 ucrt)\nPlatform: x86_64-w64-mingw32/x64\nRunning under: Windows 11 x64 (build 22631)\n\nMatrix products: default\n\n\nlocale:\n[1] LC_COLLATE=English_United States.utf8  LC_CTYPE=English_United States.utf8    LC_MONETARY=English_United States.utf8\n[4] LC_NUMERIC=C                           LC_TIME=English_United States.utf8    \n\ntime zone: America/Chicago\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nloaded via a namespace (and not attached):\n [1] compiler_4.4.0    fastmap_1.2.0     cli_3.6.2         tools_4.4.0       htmltools_0.5.8.1 rstudioapi_0.16.0\n [7] yaml_2.3.8        rmarkdown_2.27    knitr_1.46        jsonlite_1.8.8    xfun_0.44         digest_0.6.35    \n[13] rlang_1.1.3       evaluate_0.23"
+  },
+  {
+    "objectID": "slides.html#sessioninfo-2",
+    "href": "slides.html#sessioninfo-2",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "sessionInfo()",
+    "text": "sessionInfo()\nYou can print the output directly to a text file\n\nsink(\"session_info.txt\")\nsessionInfo()\nsink()\n\n\n\nStolen from https://www.geeksforgeeks.org/reproducibility-in-r-programming/"
+  },
+  {
+    "objectID": "slides.html#renv-is-your-friendv",
+    "href": "slides.html#renv-is-your-friendv",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "renv is your friendv",
+    "text": "renv is your friendv\n\nrenv ensures that the packages used in your project are recorded\nIt can save a library of packages within your project\nOr it can save a snapshot of the packages in a lockfile, from which you can recreate your project-specific package library"
+  },
+  {
+    "objectID": "slides.html#set-up-renv",
+    "href": "slides.html#set-up-renv",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "Set up renv",
+    "text": "Set up renv\nrenv::init()\n\n\n\n\nCall within a project to start using renv\nCreates a project-specific package library in renv/\nCreates a lockfile (renv.lock) that records the project state including packages\nCreates .Rprofile to make sure renv runs in all future sessions"
+  },
+  {
+    "objectID": "slides.html#update-or-record-the-project-state",
+    "href": "slides.html#update-or-record-the-project-state",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "Update (or record) the project state",
+    "text": "Update (or record) the project state\nrenv::snapshot()\n\n\nCall to update the lockfile if you change something, e.g., attach new packages\nThis can be done anytime after calling renv::init()\nIt can also be done without ever calling renv::init() (a lightweight option)"
+  },
+  {
+    "objectID": "slides.html#restore-a-project-state",
+    "href": "slides.html#restore-a-project-state",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "Restore a project state",
+    "text": "Restore a project state\nrenv::restore()\n\n\nCall to recreate/restore the project-specific library from a lockfile\nGreat when collaborating, e.g., over GitHub, or restoring an archived project\nThis will not restore the R version, just packages"
+  },
+  {
+    "objectID": "slides.html#more-renv",
+    "href": "slides.html#more-renv",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "More renv",
+    "text": "More renv\n\n\n\n\n\n\n\n\nrenv::activate()\n\n\nCall to enable renv (if not already activated)\ne.g., if only a lockfile exists because renv::init() was never called, do this before renv::restore()\n\n\n\nrenv::status()\n\n\nCall to report problems: packages used but not installed, installed but not used, version out of sync\n\n\n\n\nrenv::deactivate()\n\n\nCall to deactivate renv\narg clean = TRUE will remove the library and lockfile"
+  },
+  {
+    "objectID": "slides.html#the-renv-workflow",
+    "href": "slides.html#the-renv-workflow",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "The renv workflow",
+    "text": "The renv workflow\n\nOption 1: create a project library\n\nCall renv::init() at any time\nCall renv::snapshot() when you’re finished\n\nOption 2: create a lockfile only\n\nCall renv::snapshot() when you’re finished"
+  },
+  {
+    "objectID": "slides.html#what-is-not-reproducible",
+    "href": "slides.html#what-is-not-reproducible",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "What is not reproducible?",
+    "text": "What is not reproducible?\n…in the sense that you have control over how the data is modified and can replicate it anytime\n\nCreate a table in R. Export the table to a spreadsheet in Excel. Make manual changes to the Excel document. Import the data back into R.\nProcess some data in R. Run that data through an app or API outside of your RStudio project. Import the modified data back into R."
+  },
+  {
+    "objectID": "slides.html#parts-of-an-analysis-beyond-r",
+    "href": "slides.html#parts-of-an-analysis-beyond-r",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "Parts of an analysis: Beyond R",
+    "text": "Parts of an analysis: Beyond R\nIncludes using:\n\nAPIs\nShiny apps\nOther files and software\nOr anything outside of R used to modify data"
+  },
+  {
+    "objectID": "slides.html#handling-irreproducibility",
+    "href": "slides.html#handling-irreproducibility",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "Handling irreproducibility",
+    "text": "Handling irreproducibility\n\nSome things have to happen outside of R!\nDocument with narrative what has happened to the data\nSave the exported (unmodified) data and imported (modified) data separately"
+  },
+  {
+    "objectID": "slides.html#document-custom-functions",
+    "href": "slides.html#document-custom-functions",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "Document custom functions",
+    "text": "Document custom functions\n\nKeep custom functions in separate scripts and use source()\nUse package names in function calls if not base R (package::function())\nDescribe the function arguments, expected input and output\nComment within the function itself\nUse roxygen2 style documentation"
+  },
+  {
+    "objectID": "slides.html#when-is-a-project-over",
+    "href": "slides.html#when-is-a-project-over",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "When is a project over?",
+    "text": "When is a project over?\n\nResist project bloat\nRepeated analyses (monthly, quarterly, annually) should each be a new project\nYou can always make the final data of one project the source data of another"
+  },
+  {
+    "objectID": "slides.html#what-did-i-miss",
+    "href": "slides.html#what-did-i-miss",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "What did I miss?",
+    "text": "What did I miss?\n\nSetting a seed for random number generation (see Geeks for Geeks)\nI avoided talking about version control because that’s its own huge topic… tl;dr it’s a good idea\nTracking custom packages with renv"
+  },
+  {
+    "objectID": "slides.html#resources",
+    "href": "slides.html#resources",
+    "title": "Reproducibility, organization, and documentation in R",
+    "section": "Resources",
+    "text": "Resources\n\n\nR for Data Science: Workflow: scripts and projects\nThe tidyverse style guide\nThe renv package\nGeeks for Geeks: Reproducibility In R Programming\nR for Epidemiology: R Projects & Coding Best Practices"
+  }
+]
